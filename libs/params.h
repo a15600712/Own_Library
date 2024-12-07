@@ -14,17 +14,22 @@
 /**
  * Ring dimension for polynomial operations
  */
-#define PQC_LIB_N 256
+#define PQC_LIB_N 4
 
 /**
  * Field modulus value
  */
-#define PQC_LIB_Q 8380417
+#define PQC_LIB_Q 17
+
+/**
+ * POLYNOMIAL matrix size
+ */
+#define PQC_LIB_MATRIX_K 3
 
 /**
  * Logarithm of ring dimension
  */
-#define PQC_LIB_LOG2_N log2(N)  // log2(256)
+#define PQC_LIB_LOG2_N log2(PQC_LIB_N)  // log2(256)
 
 /**
  * Namespace macro for the PQC library functions
