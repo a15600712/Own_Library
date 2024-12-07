@@ -1,6 +1,9 @@
+cmake_minimum_required(VERSION 3.22)
+PROJECT(PQC_LIB)
 # libs/CMakeLists.txt
 add_library(libs
     zetas.c 
+    poly.c
     exp_mod.c
 )
 

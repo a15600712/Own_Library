@@ -1,7 +1,7 @@
 # Root CMakeLists.txt
-cmake_minimum_required(VERSION 3.22.1)
+cmake_minimum_required(VERSION 3.22)
 
-PROJECT(NTT)
+PROJECT(PQC_LIB)
 
 # Add math library
 find_library(MATH_LIBRARY m)
