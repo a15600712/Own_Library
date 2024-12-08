@@ -1,24 +1,36 @@
-# Root CMakeLists.txt
-cmake_minimum_required(VERSION 3.22)
+# CMakeLists.txt
+cmake_minimum_required(VERSION 3.10)
+project(PQC_LIB C)
 
-PROJECT(PQC_LIB)
+# Set C standard
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 
-# Add math library
-find_library(MATH_LIBRARY m)
+# Add compile options
+add_compile_options(-Wall -Wextra -g)
 
-# Add lib subdirectory before creating the executable
-add_subdirectory(libs)
+# Exclude verification directory from build
+set_directory_properties(PROPERTIES EXCLUDE_FROM_ALL "${CMAKE_SOURCE_DIR}/verification")
 
-# Create main executable
-add_executable(${PROJECT_NAME} main.c)
-
-# Link main executable with our library and math library
-target_link_libraries(${PROJECT_NAME} 
-    PRIVATE libs
-    PRIVATE ${MATH_LIBRARY}
+# Library source files
+set(LIB_SOURCES
+    src/arithmetic.c
+    src/ntt.c
+    src/poly.c
+    src/zetas.c
 )
 
-# Add include directories for the main executable
-target_include_directories(${PROJECT_NAME}
-    PRIVATE ${CMAKE_SOURCE_DIR}/libs
+# Create library
+add_library(pqc_lib_core ${LIB_SOURCES})
+
+# Set include directories for the library
+target_include_directories(pqc_lib_core 
+    PUBLIC 
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
+
+# Create executable
+add_executable(PQC_LIB src/main.c)
+
+# Link the library
+target_link_libraries(PQC_LIB PRIVATE pqc_lib_core)
